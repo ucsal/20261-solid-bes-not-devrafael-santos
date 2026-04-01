@@ -1,6 +1,11 @@
 package br.com.ucsal.olimpiadas;
 
 import br.com.ucsal.olimpiadas.application.domain.*;
+import br.com.ucsal.olimpiadas.application.service.ParticipanteAppService;
+import br.com.ucsal.olimpiadas.infra.repository.ParticipanteRepositoryImpl;
+import br.com.ucsal.olimpiadas.view.model.Menu;
+import br.com.ucsal.olimpiadas.view.model.MenuOpcao;
+import br.com.ucsal.olimpiadas.view.model.option.CadastrarParticipanteMO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,50 +28,35 @@ public class App {
 	public static void main(String[] args) {
 		seed();
 
-		while (true) {
-			System.out.println("\n=== OLIMPÍADA DE QUESTÕES (V1) ===");
-			System.out.println("1) Cadastrar participante");
-			System.out.println("2) Cadastrar prova");
-			System.out.println("3) Cadastrar questão (A–E) em uma prova");
-			System.out.println("4) Aplicar prova (selecionar participante + prova)");
-			System.out.println("5) Listar tentativas (resumo)");
-			System.out.println("0) Sair");
-			System.out.print("> ");
+		List<MenuOpcao> menuOpcoes = new ArrayList<>();
 
-			switch (in.nextLine()) {
-			case "1" -> cadastrarParticipante();
-			case "2" -> cadastrarProva();
-			case "3" -> cadastrarQuestao();
-			case "4" -> aplicarProva();
-			case "5" -> listarTentativas();
-			case "0" -> {
-				System.out.println("tchau");
-				return;
-			}
-			default -> System.out.println("opção inválida");
-			}
-		}
-	}
+		menuOpcoes.add(new CadastrarParticipanteMO(new ParticipanteAppService(new ParticipanteRepositoryImpl())));
 
-	static void cadastrarParticipante() {
-		System.out.print("Nome: ");
-		var nome = in.nextLine();
+		Menu.createAndLoadMenu("=== OLIMPÍADA DE QUESTÕES (V1) ===", menuOpcoes);
 
-		System.out.print("Email (opcional): ");
-		var email = in.nextLine();
-
-		if (nome == null || nome.isBlank()) {
-			System.out.println("nome inválido");
-			return;
-		}
-
-		var p = new Participante();
-		p.setId(proximoParticipanteId++);
-		p.setNome(nome);
-		p.setEmail(email);
-
-		participantes.add(p);
-		System.out.println("Participante cadastrado: " + p.getId());
+//		while (true) {
+//			System.out.println("\n=== OLIMPÍADA DE QUESTÕES (V1) ===");
+//			System.out.println("1) Cadastrar participante");
+//			System.out.println("2) Cadastrar prova");
+//			System.out.println("3) Cadastrar questão (A–E) em uma prova");
+//			System.out.println("4) Aplicar prova (selecionar participante + prova)");
+//			System.out.println("5) Listar tentativas (resumo)");
+//			System.out.println("0) Sair");
+//			System.out.print("> ");
+//
+//			switch (in.nextLine()) {
+//			case "1" -> cadastrarParticipante();
+//			case "2" -> cadastrarProva();
+//			case "3" -> cadastrarQuestao();
+//			case "4" -> aplicarProva();
+//			case "5" -> listarTentativas();
+//			case "0" -> {
+//				System.out.println("tchau");
+//				return;
+//			}
+//			default -> System.out.println("opção inválida");
+//			}
+//		}
 	}
 
 	static void cadastrarProva() {
