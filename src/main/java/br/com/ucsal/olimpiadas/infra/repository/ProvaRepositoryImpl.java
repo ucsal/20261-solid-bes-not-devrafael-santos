@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProvaRepositoryImpl implements ProvaRepository {
-    static long proximaProvaId = 1;
+    private long proximaProvaId = 1;
 
     static final List<Prova> provas = new ArrayList<>();
 
