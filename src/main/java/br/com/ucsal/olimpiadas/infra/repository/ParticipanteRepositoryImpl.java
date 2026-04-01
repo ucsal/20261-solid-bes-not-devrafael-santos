@@ -2,7 +2,6 @@ package br.com.ucsal.olimpiadas.infra.repository;
 
 import br.com.ucsal.olimpiadas.application.domain.Participante;
 import br.com.ucsal.olimpiadas.application.ports.ParticipanteRepository;
-import br.com.ucsal.olimpiadas.Exceptions.ParticipanteNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package br.com.ucsal.olimpiadas.view.model.option;
 
-import br.com.ucsal.olimpiadas.application.domain.dto.ParticipanteRequest;
+import br.com.ucsal.olimpiadas.view.model.option.dto.ParticipanteRequest;
 import br.com.ucsal.olimpiadas.application.service.ParticipanteAppService;
 import br.com.ucsal.olimpiadas.view.model.MenuOpcao;
 

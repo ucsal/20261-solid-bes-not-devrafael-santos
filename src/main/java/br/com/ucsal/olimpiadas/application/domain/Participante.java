@@ -1,6 +1,6 @@
 package br.com.ucsal.olimpiadas.application.domain;
 
-import br.com.ucsal.olimpiadas.Exceptions.InvalidNameException;
+import br.com.ucsal.olimpiadas.Exceptions.InvalidFieldException;
 
 public class Participante {
 	private long id;
@@ -15,7 +15,7 @@ public class Participante {
 
 	private void validate() {
 		if (this.nome == null || this.nome.isBlank()) {
-			throw new InvalidNameException();
+			throw new InvalidFieldException("nome");
 		}
 	}
 
