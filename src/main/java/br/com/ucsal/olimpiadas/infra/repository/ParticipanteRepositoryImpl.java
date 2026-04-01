@@ -2,10 +2,10 @@ package br.com.ucsal.olimpiadas.infra.repository;
 
 import br.com.ucsal.olimpiadas.application.domain.Participante;
 import br.com.ucsal.olimpiadas.application.ports.ParticipanteRepository;
-import br.com.ucsal.olimpiadas.infra.repository.Exceptions.ParticipanteNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ParticipanteRepositoryImpl implements ParticipanteRepository {
     static long proximoParticipanteId = 1;
@@ -13,20 +13,23 @@ public class ParticipanteRepositoryImpl implements ParticipanteRepository {
     static final List<Participante> participantes = new ArrayList<>();
 
     @Override
-    public Participante findById(long participanteId) {
-        return participantes.stream().filter(p -> p.getId() == participanteId).findFirst()
-                .orElseThrow(ParticipanteNotFoundException::new);
+    public Optional<Participante> findById(long participanteId) {
+        var paticipante = participantes.stream().filter(p -> p.getId() == participanteId).findFirst()
+                .orElse(null);
+
+        return Optional.ofNullable(paticipante);
     }
 
     @Override
     public List<Participante> findAll() {
-        return List.of();
+        return List.copyOf(participantes);
     }
 
     @Override
-    public void create(Participante participante) {
+    public Participante create(Participante participante) {
             participante.setId(proximoParticipanteId++);
             participantes.add(participante);
+            return participante;
     }
 
     @Override
