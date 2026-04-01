@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ParticipanteRepositoryImpl implements ParticipanteRepository {
-    static long proximoParticipanteId = 1;
+    private static long proximoParticipanteId = 1;
 
     static final List<Participante> participantes = new ArrayList<>();
 

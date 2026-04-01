@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class QuestaoRepositoryImpl implements QuestaoRepository {
 
-    static long proximaQuestaoId = 1;
+    private static long proximaQuestaoId = 1;
 
     static final List<Questao> questoes = new ArrayList<>();
 
