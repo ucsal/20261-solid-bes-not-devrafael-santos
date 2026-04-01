@@ -1,10 +1,10 @@
 package br.com.ucsal.olimpiadas.application.service;
 
-import br.com.ucsal.olimpiadas.Exceptions.InvalidNameException;
-import br.com.ucsal.olimpiadas.Exceptions.ParticipanteNotFoundException;
+import br.com.ucsal.olimpiadas.Exceptions.IdNotFoundException;
+import br.com.ucsal.olimpiadas.Exceptions.InvalidFieldException;
 import br.com.ucsal.olimpiadas.application.domain.Participante;
-import br.com.ucsal.olimpiadas.application.domain.dto.ParticipanteRequest;
-import br.com.ucsal.olimpiadas.application.domain.dto.ParticipanteResponse;
+import br.com.ucsal.olimpiadas.view.model.option.dto.ParticipanteRequest;
+import br.com.ucsal.olimpiadas.view.model.option.dto.ParticipanteResponse;
 import br.com.ucsal.olimpiadas.application.ports.ParticipanteRepository;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class ParticipanteAppService {
 
     public ParticipanteResponse findById(long participanteId) {
          var participante = participanteRepository.findById(participanteId)
-                .orElseThrow(ParticipanteNotFoundException::new);
+                .orElseThrow(IdNotFoundException::new);
 
         return new ParticipanteResponse(participante.getId(), participante.getNome(), participante.getEmail());
     }
@@ -34,7 +34,7 @@ public class ParticipanteAppService {
 
 
         if (participanteRequest.nome() == null || participanteRequest.nome().isBlank()) {
-            throw new InvalidNameException();
+            throw new InvalidFieldException("nome");
         }
 
         var newParticipante = new Participante(participanteRequest.nome(), participanteRequest.email());
