@@ -1,4 +1,4 @@
-package br.com.ucsal.olimpiadas.infra.repository.Exceptions;
+package br.com.ucsal.olimpiadas.Exceptions;
 
 public class InvalidNameException extends RuntimeException {
     public InvalidNameException() {
