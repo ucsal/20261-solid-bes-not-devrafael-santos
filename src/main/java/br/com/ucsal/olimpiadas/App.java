@@ -1,5 +1,7 @@
 package br.com.ucsal.olimpiadas;
 
+import br.com.ucsal.olimpiadas.application.domain.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
