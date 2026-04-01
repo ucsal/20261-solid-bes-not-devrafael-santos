@@ -3,7 +3,7 @@ package br.com.ucsal.olimpiadas.view.model;
 public abstract class MenuOpcao {
     private String titulo;
 
-    public MenuOpcao(String titulo) {
+    protected MenuOpcao(String titulo) {
         this.titulo = titulo;
     }
 

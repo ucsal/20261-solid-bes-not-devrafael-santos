@@ -12,8 +12,8 @@ public class CadastrarParticipanteMO extends MenuOpcao {
 
     private static final Scanner in = new Scanner(System.in);
 
-    public CadastrarParticipanteMO(String titulo, ParticipanteAppService participanteAppService) {
-        super(titulo);
+    public CadastrarParticipanteMO(ParticipanteAppService participanteAppService) {
+        super("Cadastrar participante");
         this.participanteAppService = participanteAppService;
     }
 
