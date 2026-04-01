@@ -27,9 +27,10 @@ public class ParticipanteRepositoryImpl implements ParticipanteRepository {
     }
 
     @Override
-    public void create(Participante participante) {
+    public Participante create(Participante participante) {
             participante.setId(proximoParticipanteId++);
             participantes.add(participante);
+            return participante;
     }
 
     @Override

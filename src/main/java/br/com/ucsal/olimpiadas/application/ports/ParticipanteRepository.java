@@ -11,7 +11,7 @@ public interface ParticipanteRepository {
 
     public List<Participante> findAll();
 
-    public void create(Participante participante);
+    public Participante create(Participante participante);
 
     public boolean isEmpty();
 }

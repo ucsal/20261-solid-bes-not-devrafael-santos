@@ -43,6 +43,4 @@ public class Participante {
 		this.email = email;
 	}
 
-	public Participante orElseThrow(Object o) {
-	}
 }

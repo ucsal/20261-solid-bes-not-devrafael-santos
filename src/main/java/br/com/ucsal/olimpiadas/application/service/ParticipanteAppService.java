@@ -30,7 +30,7 @@ public class ParticipanteAppService {
                 .toList();
     }
 
-    public void create(ParticipanteRequest participanteRequest) {
+    public long create(ParticipanteRequest participanteRequest) {
 
 
         if (participanteRequest.nome() == null || participanteRequest.nome().isBlank()) {
@@ -39,7 +39,7 @@ public class ParticipanteAppService {
 
         var newParticipante = new Participante(participanteRequest.nome(), participanteRequest.email());
 
-        participanteRepository.create(newParticipante);
+        return participanteRepository.create(newParticipante).getId();
     }
 
     public boolean isEmpty() {
