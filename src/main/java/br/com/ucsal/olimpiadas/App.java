@@ -3,12 +3,15 @@ package br.com.ucsal.olimpiadas;
 import br.com.ucsal.olimpiadas.application.domain.*;
 import br.com.ucsal.olimpiadas.application.service.ParticipanteAppService;
 import br.com.ucsal.olimpiadas.application.service.ProvaAppService;
+import br.com.ucsal.olimpiadas.application.service.QuestaoAppService;
 import br.com.ucsal.olimpiadas.infra.repository.ParticipanteRepositoryImpl;
 import br.com.ucsal.olimpiadas.infra.repository.ProvaRepositoryImpl;
+import br.com.ucsal.olimpiadas.infra.repository.QuestaoRepositoryImpl;
 import br.com.ucsal.olimpiadas.view.model.Menu;
 import br.com.ucsal.olimpiadas.view.model.MenuOpcao;
 import br.com.ucsal.olimpiadas.view.model.option.CadastrarParticipanteMO;
 import br.com.ucsal.olimpiadas.view.model.option.CadastrarProvaMO;
+import br.com.ucsal.olimpiadas.view.model.option.CadastrarQuestaoMO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +36,16 @@ public class App {
 
 		List<MenuOpcao> menuOpcoes = new ArrayList<>();
 
+		var questaoAppService = new QuestaoAppService(new QuestaoRepositoryImpl());
+
+		var provaAppService = new ProvaAppService(new ProvaRepositoryImpl());
+
+
 		menuOpcoes.add(new CadastrarParticipanteMO(new ParticipanteAppService(new ParticipanteRepositoryImpl())));
 
 		menuOpcoes.add(new CadastrarProvaMO(new ProvaAppService(new ProvaRepositoryImpl())));
+
+		menuOpcoes.add(new CadastrarQuestaoMO(questaoAppService, provaAppService));
 
 		Menu.createAndLoadMenu("=== OLIMPÍADA DE QUESTÕES (V1) ===", menuOpcoes);
 
@@ -82,44 +92,44 @@ public class App {
 //	}
 
 	static void cadastrarQuestao() {
-		if (provas.isEmpty()) {
-			System.out.println("não há provas cadastradas");
-			return;
-		}
-
-		var provaId = escolherProva();
-		if (provaId == null)
-			return;
-
-		System.out.println("Enunciado:");
-		var enunciado = in.nextLine();
-
-		var alternativas = new String[5];
-		for (int i = 0; i < 5; i++) {
-			char letra = (char) ('A' + i);
-			System.out.print("Alternativa " + letra + ": ");
-			alternativas[i] = letra + ") " + in.nextLine();
-		}
-
-		System.out.print("Alternativa correta (A–E): ");
-		char correta;
-		try {
-			correta = Questao.normalizar(in.nextLine().trim().charAt(0));
-		} catch (Exception e) {
-			System.out.println("alternativa inválida");
-			return;
-		}
-
-		var q = new Questao();
-		q.setId(proximaQuestaoId++);
-		q.setProvaId(provaId);
-		q.setEnunciado(enunciado);
-		q.setAlternativas(alternativas);
-		q.setAlternativaCorreta(correta);
-
-		questoes.add(q);
-
-		System.out.println("Questão cadastrada: " + q.getId() + " (na prova " + provaId + ")");
+//		if (provas.isEmpty()) {
+//			System.out.println("não há provas cadastradas");
+//			return;
+//		}
+//
+//		var provaId = escolherProva();
+//		if (provaId == null)
+//			return;
+//
+//		System.out.println("Enunciado:");
+//		var enunciado = in.nextLine();
+//
+//		var alternativas = new String[5];
+//		for (int i = 0; i < 5; i++) {
+//			char letra = (char) ('A' + i);
+//			System.out.print("Alternativa " + letra + ": ");
+//			alternativas[i] = letra + ") " + in.nextLine();
+//		}
+//
+//		System.out.print("Alternativa correta (A–E): ");
+//		char correta;
+//		try {
+//			correta = Questao.normalizar(in.nextLine().trim().charAt(0));
+//		} catch (Exception e) {
+//			System.out.println("alternativa inválida");
+//			return;
+//		}
+//
+//		var q = new Questao();
+//		q.setId(proximaQuestaoId++);
+//		q.setProvaId(provaId);
+//		q.setEnunciado(enunciado);
+//		q.setAlternativas(alternativas);
+//		q.setAlternativaCorreta(correta);
+//
+//		questoes.add(q);
+//
+//		System.out.println("Questão cadastrada: " + q.getId() + " (na prova " + provaId + ")");
 	}
 
 
