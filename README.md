@@ -1,8 +1,8 @@
-# Olimpíada de Questões (V1) 🏆
+# Olimpíada de Questões
 
-Este projeto é um sistema de gerenciamento e aplicação de provas (com foco em questões de xadrez) desenvolvido em Java. 
-
-O objetivo principal deste repositório é demonstrar a evolução de um código monolítico para uma **Arquitetura Limpa (Clean Architecture)** através da aplicação rigorosa dos **Princípios SOLID** e Injeção de Dependência Pura (Pure DI).
+OBS: A Apenas utilizei I.A nas fazes finais do projeto, onde pedir algumas dicas de polimento e para agilizar na criação do README. A estrutura do projeto e toda a refatoração foi feita por mim.
+Sei que estou tentando matar uma formiga com uma bazuca, mas queria me desafiar e tentar aplicar alguns conceitos de cabeça. 
+Outrossim, concordo que não ficou 100% Clean Architecture e nem utilizei 100% de SOLID, mas aproveitei a oportunidade para me divertir no processo e experimentar algumas alternativas diferentes no desenvolvimento de software.
 
 ## 📐 Arquitetura e Aplicação do SOLID
 
