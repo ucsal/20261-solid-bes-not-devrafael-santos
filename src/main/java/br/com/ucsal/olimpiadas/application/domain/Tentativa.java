@@ -10,6 +10,11 @@ public class Tentativa {
 
 	private final List<Resposta> respostas = new ArrayList<>();
 
+	public Tentativa(long participanteId, long provaId) {
+		this.participanteId = participanteId;
+		this.provaId = provaId;
+	}
+
 	public long getId() {
 		return id;
 	}

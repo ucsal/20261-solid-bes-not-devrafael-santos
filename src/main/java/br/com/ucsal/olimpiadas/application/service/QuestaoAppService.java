@@ -28,36 +28,28 @@ public class QuestaoAppService {
                 questao.getProvaId(),
                 questao.getEnunciado(),
                 questao.getAlternativaCorreta(),
-                questao.getAlternativas());
+                questao.getAlternativas(),
+                questao.getFenInicial()
+        );
     }
 
     public List<QuestaoResponse> findAll() {
         return questaoRepository.findAll().stream()
-                .map(q -> new QuestaoResponse(
-                        q.getId(),
-                        q.getProvaId(),
-                        q.getEnunciado(),
-                        q.getAlternativaCorreta(),
-                        q.getAlternativas()))
+                .map(questao -> new QuestaoResponse(
+                        questao.getId(),
+                        questao.getProvaId(),
+                        questao.getEnunciado(),
+                        questao.getAlternativaCorreta(),
+                        questao.getAlternativas(),
+                        questao.getFenInicial()
+                ))
                 .toList();
     }
 
     public long create(QuestaoRequest questaoRequest) {
 
-
-        var newQuestao = new Questao(questaoRequest.getProvaId(), questaoRequest.getEnunciado(), questaoRequest.getAlternativas(), questaoRequest.getAlternativaCorreta());
-
-         if (newQuestao.getEnunciado() == null || newQuestao.getEnunciado().isBlank()) {
-             throw new InvalidFieldException("enunciado");
-         }
-
-         if (newQuestao.getAlternativas() == null || newQuestao.getAlternativas().isEmpty()) {
-             throw new InvalidFieldException("alternativas");
-         }
-
-         if (newQuestao.getAlternativaCorreta() < 'A' || newQuestao.getAlternativaCorreta() >= 'A' + newQuestao.getAlternativas().size()) {
-             throw new InvalidFieldException("alternativaCorreta");
-         }
+        var newQuestao = new Questao(questaoRequest.getProvaId(), questaoRequest.getEnunciado(),
+                questaoRequest.getAlternativas(), questaoRequest.getAlternativaCorreta());
 
         return questaoRepository.create(newQuestao).getId();
     }
