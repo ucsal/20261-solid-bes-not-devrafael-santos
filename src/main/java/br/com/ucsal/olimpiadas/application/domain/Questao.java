@@ -38,8 +38,6 @@ public class Questao {
 		if (alternativas == null || alternativas.size() != 5) {
 			throw new IllegalArgumentException("A questão deve possuir exatamente 5 alternativas.");
 		}
-
-
 	}
 
 	public String getFenInicial() {

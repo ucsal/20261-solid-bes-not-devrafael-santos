@@ -29,7 +29,8 @@ public class CadastrarQuestaoMO extends MenuOpcao {
 
     public void action() {
         if (provaAppService.isEmpty()) {
-            throw new NoRecordException("prova");
+            System.out.println("Nenhuma prova foi cadastrada");
+            return;
         }
 
         System.out.println("\nProvas:");

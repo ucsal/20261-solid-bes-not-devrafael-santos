@@ -6,6 +6,12 @@ public class Resposta {
 	private char alternativaMarcada;
 	private boolean correta;
 
+	public Resposta(long questaoId, char alternativaMarcada, boolean correta) {
+		this.questaoId = questaoId;
+		this.alternativaMarcada = alternativaMarcada;
+		this.correta = correta;
+	}
+
 	public long getQuestaoId() {
 		return questaoId;
 	}
