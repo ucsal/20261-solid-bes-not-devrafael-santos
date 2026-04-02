@@ -14,6 +14,7 @@ import br.com.ucsal.olimpiadas.view.model.Menu;
 import br.com.ucsal.olimpiadas.view.model.MenuOpcao;
 import br.com.ucsal.olimpiadas.view.model.option.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,12 @@ public class App {
 		menuOpcoes.add(new AplicarProvaMO(participanteAppService, provaAppService, questaoAppService, tentativaAppService));
 		menuOpcoes.add(new ListarTentativasMO(tentativaAppService));
 
-		Menu.createAndLoadMenu("=== OLIMPÍADA DE QUESTÕES (V1) ===", menuOpcoes);
+		try {
+			Menu.createAndLoadMenu("=== OLIMPÍADA DE QUESTÕES (V1) ===", menuOpcoes);
+		} catch (RuntimeException e) {
+			System.out.println("Erro: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
+		}
 	}
 }
