@@ -1,8 +1,10 @@
 # Olimpíada de Questões
 
 OBS: A Apenas utilizei I.A nas fazes finais do projeto, onde pedir algumas dicas de polimento e para agilizar na criação do README. A estrutura do projeto e toda a refatoração foi feita por mim.
-Sei que estou tentando matar uma formiga com uma bazuca, mas queria me desafiar e tentar aplicar alguns conceitos de cabeça. 
+Sei que tentei matar uma formiga com uma bazuca, mas queria me desafiar e tentar aplicar alguns conceitos de cabeça. 
 Outrossim, concordo que não ficou 100% Clean Architecture e nem utilizei 100% de SOLID, mas aproveitei a oportunidade para me divertir no processo e experimentar algumas alternativas diferentes no desenvolvimento de software.
+
+O bug que dava NullPointerException foi resolvido. O bug se na hora de imprimir o "q.fenInicial()". Por se tratar de uma variável que pode ser nula, só faltava uma verificação do valor.
 
 ## 📐 Arquitetura e Aplicação do SOLID
 

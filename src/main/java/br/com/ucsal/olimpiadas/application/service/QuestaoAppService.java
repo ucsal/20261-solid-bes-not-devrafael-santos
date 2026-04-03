@@ -49,7 +49,8 @@ public class QuestaoAppService {
     public long create(QuestaoRequest questaoRequest) {
 
         var newQuestao = new Questao(questaoRequest.getProvaId(), questaoRequest.getEnunciado(),
-                questaoRequest.getAlternativas(), questaoRequest.getAlternativaCorreta());
+                questaoRequest.getAlternativas(), questaoRequest.getAlternativaCorreta(),
+                questaoRequest.getFenInicial() != null ? questaoRequest.getFenInicial() : null);
 
         return questaoRepository.create(newQuestao).getId();
     }

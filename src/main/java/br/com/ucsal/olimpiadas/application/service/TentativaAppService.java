@@ -19,7 +19,7 @@ public class TentativaAppService {
         this.questaoRepository = questaoRepository;
     }
 
-    public long newTentativa(TentativaRequest tentativaRequest) {
+    public TentativaResponse newTentativa(TentativaRequest tentativaRequest) {
 
         var tentativa = new Tentativa(tentativaRequest.participanteId(), tentativaRequest.provaId());
 
@@ -36,7 +36,15 @@ public class TentativaAppService {
             tentativa.getRespostas().add(resposta);
         }
 
-        return tentativaRepository.create(tentativa).getId();
+        var response = tentativaRepository.create(tentativa);
+
+        return new TentativaResponse(
+                response.getId(),
+                response.getParticipanteId(),
+                response.getProvaId(),
+                response.getRespostas(),
+                (int) response.getRespostas().stream().filter(Resposta::isCorreta).count()
+        );
     }
 
     public List<TentativaResponse> findAll() {
