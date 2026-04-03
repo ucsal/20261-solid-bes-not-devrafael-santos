@@ -22,7 +22,13 @@ public class CadastrarProvaMO extends MenuOpcao {
 
         var provaRequest = new ProvaRequest(titulo);
 
-        var provaId = provaAppService.create(provaRequest);
+        long provaId;
+        try {
+            provaId = provaAppService.create(provaRequest);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         System.out.println("Prova criada: " + provaId);
     }
 }

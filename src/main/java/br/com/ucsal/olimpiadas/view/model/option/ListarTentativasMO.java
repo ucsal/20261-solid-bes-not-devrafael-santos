@@ -21,7 +21,6 @@ public class ListarTentativasMO extends MenuOpcao {
         var tentativas = tentativaAppService.findAll();
 
         if (tentativas.isEmpty()) {
-            System.out.println("Nenhuma tentativa registrada.");
             return;
         }
 

@@ -1,5 +1,6 @@
 package br.com.ucsal.olimpiadas.view.model.option;
 
+import br.com.ucsal.olimpiadas.Exceptions.IdNotFoundException;
 import br.com.ucsal.olimpiadas.application.domain.Questao;
 import br.com.ucsal.olimpiadas.application.service.ParticipanteAppService;
 import br.com.ucsal.olimpiadas.application.service.ProvaAppService;
@@ -8,6 +9,8 @@ import br.com.ucsal.olimpiadas.application.service.TentativaAppService;
 import br.com.ucsal.olimpiadas.view.model.MenuOpcao;
 import br.com.ucsal.olimpiadas.view.model.option.dto.RespostaRequest;
 import br.com.ucsal.olimpiadas.view.model.option.dto.TentativaRequest;
+import br.com.ucsal.olimpiadas.view.model.option.dto.TentativaResponse;
+import br.com.ucsal.olimpiadas.view.util.ConsoleBoardPrinter;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -45,7 +48,17 @@ public class AplicarProvaMO extends MenuOpcao {
         System.out.println("\nParticipantes:");
         participanteAppService.findAll().forEach(p -> System.out.printf("  %d) %s%n", p.id(), p.nome()));
         System.out.print("Escolha o id do participante: ");
+
         long participanteId = Long.parseLong(in.nextLine());
+        try {
+            participanteAppService.findById(participanteId);
+        } catch (IdNotFoundException e) {
+            System.out.println("id inválido");
+            return;
+        } catch (Exception e) {
+            System.out.println("entrada inválida");
+            return;
+        }
 
         System.out.println("\nProvas:");
         provaAppService.findAll().forEach(p -> System.out.printf("  %d) %s%n", p.id(), p.titulo()));
@@ -69,7 +82,7 @@ public class AplicarProvaMO extends MenuOpcao {
 
             if (q.fenInicial() != null && !q.fenInicial().isBlank()) {
                 System.out.println("Posição inicial:");
-                imprimirTabuleiroFen(q.fenInicial());
+                ConsoleBoardPrinter.imprimir(q.fenInicial());
             }
 
             for (var alt : q.alternativas()) {
@@ -89,35 +102,17 @@ public class AplicarProvaMO extends MenuOpcao {
         }
 
         var tentativaRequest = new TentativaRequest(participanteId, provaId, respostas);
-        tentativaAppService.newTentativa(tentativaRequest);
 
-        System.out.println("\n--- Fim da Prova ---");
-        System.out.println("Tentativa salva com sucesso!");
-    }
-
-    private void imprimirTabuleiroFen(String fen) {
-        String parteTabuleiro = fen.split(" ")[0];
-        String[] ranks = parteTabuleiro.split("/");
-
-        System.out.println("\n    a b c d e f g h");
-        System.out.println("   -----------------");
-
-        for (int r = 0; r < 8; r++) {
-            String rank = ranks[r];
-            System.out.print((8 - r) + " | ");
-            for (char c : rank.toCharArray()) {
-                if (Character.isDigit(c)) {
-                    int vazios = c - '0';
-                    for (int i = 0; i < vazios; i++) {
-                        System.out.print(". ");
-                    }
-                } else {
-                    System.out.print(c + " ");
-                }
-            }
-            System.out.println("| " + (8 - r));
+        TentativaResponse tentativaResponse;
+        try {
+            tentativaResponse = tentativaAppService.newTentativa(tentativaRequest);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
         }
-        System.out.println("   -----------------");
-        System.out.println("    a b c d e f g h\n");
+
+        int nota = tentativaResponse.acertos();
+        System.out.println("\n--- Fim da Prova ---");
+        System.out.println("Nota (acertos): " + nota + " / " + tentativaResponse.respostas().size());
     }
 }
