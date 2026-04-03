@@ -1,5 +1,6 @@
 package br.com.ucsal.olimpiadas.view.model;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,12 +15,18 @@ public class Menu {
         this.titulo = titulo;
         this.menuOpcoes = menuOpcoes;
 
-        System.out.println("\\n " + this.titulo);
-
-        int opcao;
+        int opcao = -1;
         do {
             draw();
-            opcao = in.nextInt();
+
+            String input = in.nextLine().trim();
+
+            try{
+                opcao = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("opção inválida");
+                continue;
+            }
 
             if(opcao == 0) {
                 System.out.println("tchau");
@@ -42,9 +49,11 @@ public class Menu {
     }
 
     private void draw() {
+        System.out.println("\n " + this.titulo);
         for (int i = 0; i < menuOpcoes.size(); i++) {
             System.out.println((i + 1) + ") " + menuOpcoes.get(i).getTitulo());
         }
+        System.out.println("0) Sair");
         System.out.print("> ");
     }
 }

@@ -14,7 +14,6 @@ import br.com.ucsal.olimpiadas.view.model.Menu;
 import br.com.ucsal.olimpiadas.view.model.MenuOpcao;
 import br.com.ucsal.olimpiadas.view.model.option.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

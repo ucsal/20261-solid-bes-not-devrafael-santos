@@ -40,9 +40,24 @@ public class CadastrarQuestaoMO extends MenuOpcao {
             System.out.printf("  %d) %s%n", p.id(), p.titulo());
         }
         System.out.print("Escolha o id da prova: ");
-        long id = Long.parseLong(in.nextLine());
 
-        var provaId = provaAppService.findById(id).id();
+        String input = in.nextLine().trim();
+
+        long inputId = 0;
+        try{
+            inputId = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("opção inválida");
+            return;
+        }
+
+        long provaId;
+        try {
+            provaId = provaAppService.findById(inputId).id();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         System.out.println("Enunciado:");
         var enunciado = in.nextLine();
@@ -64,7 +79,6 @@ public class CadastrarQuestaoMO extends MenuOpcao {
         }
 
         var novaQuestao = new QuestaoRequest(provaId, enunciado, correta, alternativas);
-
 
         var novaQuestaoId = questaoAppService.create(novaQuestao);
 
