@@ -1,4 +1,4 @@
-package br.com.ucsal.olimpiadas;
+package br.com.ucsal.olimpiadas.application.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,11 @@ public class Tentativa {
 	private long provaId;
 
 	private final List<Resposta> respostas = new ArrayList<>();
+
+	public Tentativa(long participanteId, long provaId) {
+		this.participanteId = participanteId;
+		this.provaId = provaId;
+	}
 
 	public long getId() {
 		return id;
